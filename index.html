@@ -1,60 +1,945 @@
+
 <!doctype html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fff2f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>Thời khóa biểu của tui</title>
+<title>Thời khóa biểu của tui 🌷</title>
+
 <style>
-:root{--bg:#fff8fb;--ink:#493e51;--muted:#897d90;--pink:#ffd8e7;--lav:#e7ddff;--mint:#d9f5e8;--yellow:#fff0bd;--blue:#dceeff;--card:#fff;--line:#f0e5ee;--accent:#cb79a0;--accent-strong:#d98eb1;--safe-bottom:env(safe-area-inset-bottom,0px)}
-:root[data-theme="lavender"]{--accent:#9d87d5;--accent-strong:#a998df;--pink:#e8defd;--bg:#fbf9ff;--line:#eae4f5}
-:root[data-theme="mint"]{--accent:#62a98c;--accent-strong:#78bea1;--pink:#d9f3e7;--bg:#f7fffb;--line:#e0f0e8}
-:root[data-mode="dark"]{--bg:#1f1b26;--ink:#f5edf8;--muted:#b8aabd;--card:#2b2533;--line:#403747;--pink:#463345;--lav:#393047;--mint:#283e38;--yellow:#463d2a;--blue:#293b4b;--accent-strong:#b987aa}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,color-mix(in srgb,var(--pink) 55%,var(--bg)) 0,var(--bg) 320px);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);padding:env(safe-area-inset-top) 14px calc(94px + var(--safe-bottom));-webkit-tap-highlight-color:transparent}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:780px;margin:0 auto}.hero{padding:20px 4px 14px}.topline{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:800}.profile-mini{display:flex;align-items:center;gap:8px;min-width:0}.avatar{width:42px;height:42px;flex:none;border-radius:50%;object-fit:cover;background:var(--pink);border:2px solid var(--card)}.avatar-fallback{display:grid;place-items:center;font-size:20px}.hero h1{font-size:29px;line-height:1.12;margin:9px 0}.hero p{margin:7px 0 0;color:var(--muted);font-size:14px}.datepill{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 12px;font-size:12px;margin-top:13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.btn{border:1px solid var(--line);border-radius:14px;padding:11px 14px;font-weight:750;font-size:14px;background:var(--card);color:var(--ink);box-shadow:0 3px 12px #6b45620b}.btn.primary{background:var(--accent-strong);border-color:transparent;color:#fff}.btn.soft{background:var(--lav)}.btn:active,.navbtn:active{transform:scale(.98)}.weeknav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}.weeknav h2{font-size:16px;margin:0;text-align:center}.arrow{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:9px 13px;font-size:18px;color:var(--ink)}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-bottom:12px}.day{border:1px solid var(--line);border-radius:13px;background:var(--card);padding:10px 2px;text-align:center;color:var(--muted);font-size:11px}.day strong{display:block;font-size:15px;color:var(--ink);margin-top:5px}.day.active{background:var(--lav);border-color:var(--accent)}.day.today strong:after{content:" •";color:var(--accent)}.summary{display:flex;gap:8px;margin:12px 0}.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:var(--muted)}.schedule{display:grid;gap:9px}.lesson{display:grid;grid-template-columns:58px minmax(0,1fr) 30px;gap:10px;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:17px;padding:10px;box-shadow:0 4px 14px #573e5b06}.period{border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--tint,var(--lav));font-size:11px;color:var(--muted);padding:6px 2px;text-align:center}.period b{font-size:16px;color:var(--ink)}.lesson h3{font-size:15px;margin:3px 0 5px;overflow-wrap:anywhere}.details{font-size:12px;color:var(--muted);line-height:1.45}.lesson-actions{display:flex;flex-direction:column;gap:5px}.iconbtn{border:0;background:var(--bg);border-radius:9px;width:29px;height:29px;color:var(--muted)}.empty{padding:30px 18px;text-align:center;background:var(--card);border:1px dashed var(--line);border-radius:18px;color:var(--muted)}.empty .emoji{font-size:34px}.empty h3{color:var(--ink);margin:9px 0 5px}footer{font-size:11px;text-align:center;color:var(--muted);margin:18px 0 5px}.view-title{font-size:23px;margin:8px 0 4px}.subtext{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:16px;margin:12px 0}.panel h3{font-size:15px;margin:0 0 12px}.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}.panel-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:var(--pink);font-size:19px;flex:none}.panel-head h3{margin:0}.panel-head p{margin:3px 0 0;font-size:12px;color:var(--muted)}.field{display:block;margin:0 0 14px}.field:last-child{margin-bottom:0}.field span{display:block;font-size:12px;font-weight:750;margin-bottom:7px}.field input:not([type=radio]):not([type=checkbox]):not([type=file]),.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);outline-color:var(--accent)}.rowfield{display:flex;align-items:center;justify-content:space-between;gap:12px}.rowfield p{font-size:13px;margin:0}.rowfield small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}.switch{width:46px;height:27px;position:relative;flex:none}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;border-radius:30px;background:#c9c1ce;transition:.2s}.slider:before{content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:var(--accent-strong)}.switch input:checked+.slider:before{transform:translateX(19px)}.choicegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choice{border:1px solid var(--line);border-radius:12px;padding:10px 5px;text-align:center;background:var(--bg);font-size:12px;color:var(--ink)}.choice input{accent-color:var(--accent);margin-right:4px}.custom-minutes{display:flex;gap:8px;align-items:center;margin-top:10px}.custom-minutes input{width:100px;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--bg);color:var(--ink)}.avatar-row{display:flex;align-items:center;gap:14px}.avatar-large{width:68px;height:68px;border-radius:50%;object-fit:cover;background:var(--pink);border:2px solid var(--line)}.filelabel{display:inline-block;border-radius:12px;padding:10px 12px;background:var(--lav);font-size:12px;font-weight:750;cursor:pointer}.filelabel input{display:none}.colors{display:flex;gap:12px;flex-wrap:wrap}.colorchoice input{position:absolute;opacity:0}.colorchoice span{display:block;width:32px;height:32px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line)}.colorchoice input:checked+span{box-shadow:0 0 0 2px var(--accent)}.notice{background:var(--yellow);border-radius:12px;padding:11px 12px;color:var(--ink);font-size:12px;line-height:1.5}.status{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}.bottomnav{position:fixed;z-index:5;bottom:0;left:0;right:0;padding:8px 12px calc(8px + var(--safe-bottom));background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:8px}.navinner{width:100%;max-width:540px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.navbtn{border:0;border-radius:14px;padding:8px 4px;background:transparent;color:var(--muted);font-size:11px;font-weight:700}.navbtn span{display:block;font-size:20px;margin-bottom:3px}.navbtn.active{background:var(--lav);color:var(--ink)}dialog{border:0;border-radius:23px;padding:0;width:min(500px,calc(100% - 26px));box-shadow:0 20px 70px #3e244333;color:var(--ink);background:var(--card);max-height:90dvh}dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}.modalhead{padding:19px 20px 10px;background:var(--pink)}.modalhead h2{margin:0;font-size:20px}.modalbody{padding:16px 20px 20px;overflow:auto}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalactions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.smallnote{font-size:12px;color:var(--muted);line-height:1.5}.hidden{display:none!important}
-@media(min-width:620px){.schedule{grid-template-columns:1fr 1fr}.hero h1{font-size:34px}.day{padding:12px 4px}.lesson{min-width:0}.bottomnav{border:1px solid var(--line);border-bottom:0;border-radius:20px 20px 0 0}}
+:root{
+  --bg:#fff8fb;
+  --ink:#493e51;
+  --muted:#897d90;
+  --pink:#ffd8e7;
+  --lav:#e7ddff;
+  --mint:#d9f5e8;
+  --yellow:#fff0bd;
+  --blue:#dceeff;
+  --card:#fff;
+  --line:#f0e5ee;
+  --accent:#cb79a0;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(180deg,#fff1f7 0,#faf7ff 280px,var(--bg) 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  padding:env(safe-area-inset-top) 14px calc(24px + env(safe-area-inset-bottom));
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
+.app{max-width:780px;margin:0 auto}
+.hero{padding:22px 4px 14px}
+.eyebrow{
+  font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:#ad7392;font-weight:800
+}
+.hero h1{font-size:29px;line-height:1.12;margin:8px 0}
+.hero p{margin:7px 0 0;color:var(--muted);font-size:14px}
+.datepill{
+  display:inline-block;background:#fff;border:1px solid #f5dce8;
+  border-radius:99px;padding:8px 12px;font-size:12px;margin-top:13px
+}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.btn{
+  border:0;border-radius:14px;padding:11px 14px;
+  font-weight:750;font-size:13px;background:#fff;color:var(--ink);
+  box-shadow:0 3px 12px #6b45620b
+}
+.btn.primary{background:#d98eb1;color:white}
+.btn.soft{background:#f0e8ff}
+.btn:active{transform:scale(.98)}
+.reminderbar{
+  background:#fff;border:1px solid var(--line);border-radius:17px;
+  padding:13px;margin:12px 0 16px;display:grid;gap:9px
+}
+.reminder-title{font-weight:800;font-size:14px}
+.reminder-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.reminder-row select{
+  padding:9px;border:1px solid #eadde9;border-radius:11px;
+  background:white;color:var(--ink)
+}
+.smallnote{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.status{display:flex;gap:7px;align-items:flex-start}
+.status-dot{
+  width:8px;height:8px;flex:none;border-radius:50%;
+  background:#d9b8c9;margin-top:4px
+}
+.status-dot.ok{background:#68b994}
+.weeknav{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin:12px 0
+}
+.weeknav h2{font-size:16px;margin:0;text-align:center}
+.arrow{
+  border:0;border-radius:12px;background:#fff;
+  padding:9px 13px;font-size:18px;color:var(--ink)
+}
+.days{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:5px;margin-bottom:12px
+}
+.day{
+  border:1px solid #f0e3ed;border-radius:13px;background:#fff;
+  padding:10px 2px;text-align:center;color:var(--muted);
+  font-size:11px;min-width:0
+}
+.day strong{display:block;font-size:15px;color:var(--ink);margin-top:5px}
+.day.active{background:#f4eaff;border-color:#d9c6fa;box-shadow:inset 0 0 0 1px #d9c6fa}
+.day.today strong:after{content:" •";color:#d98eb1}
+.summary{display:flex;gap:8px;margin:12px 0}
+.stat{
+  flex:1;min-width:0;background:#fff;border:1px solid var(--line);
+  border-radius:15px;padding:12px
+}
+.stat b{display:block;font-size:20px}
+.stat span{font-size:11px;color:var(--muted)}
+.schedule{display:grid;gap:9px}
+.lesson{
+  display:grid;grid-template-columns:60px minmax(0,1fr) 30px;
+  gap:10px;align-items:stretch;background:#fff;border:1px solid var(--line);
+  border-radius:17px;padding:10px;box-shadow:0 4px 14px #573e5b06
+}
+.period{
+  border-radius:12px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--tint,#f4eaff);
+  font-size:11px;color:#74627a;padding:6px 2px;text-align:center;
+  overflow-wrap:anywhere
+}
+.period b{font-size:15px;color:var(--ink)}
+.lesson h3{font-size:15px;margin:3px 0 5px;overflow-wrap:anywhere}
+.details{font-size:12px;color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.lesson-actions{display:flex;flex-direction:column;gap:5px}
+.iconbtn{
+  border:0;background:#faf6fb;border-radius:9px;width:29px;height:29px;
+  color:#806c84
+}
+.empty{
+  padding:30px 18px;text-align:center;background:#fff;
+  border:1px dashed #e8d5e5;border-radius:18px;color:var(--muted)
+}
+.empty .emoji{font-size:34px}
+.empty h3{color:var(--ink);margin:9px 0 5px}
+footer{font-size:11px;text-align:center;color:#9b8ca0;margin:18px 0 5px}
+dialog{
+  border:0;border-radius:23px;padding:0;width:min(500px,calc(100% - 26px));
+  box-shadow:0 20px 70px #3e244333;color:var(--ink);max-height:90dvh;
+  background:white
+}
+dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
+.modalhead{padding:19px 20px 10px;background:#fff4f9}
+.modalhead h2{margin:0;font-size:20px}
+.modalbody{padding:16px 20px 20px;overflow:auto}
+.field{display:block;margin:0 0 13px}
+.field span{display:block;font-size:12px;font-weight:750;margin-bottom:6px}
+.field input,.field select{
+  width:100%;border:1px solid #eadde9;border-radius:12px;
+  padding:12px;background:#fff;color:var(--ink);outline-color:#d98eb1
+}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modalactions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.colors{display:flex;gap:12px;flex-wrap:wrap}
+.colorchoice input{position:absolute;opacity:0}
+.colorchoice span{
+  display:block;width:31px;height:31px;border-radius:50%;
+  border:2px solid white;box-shadow:0 0 0 1px #e6dce6
+}
+.colorchoice input:checked+span{box-shadow:0 0 0 2px #9a7194}
+.hidden{display:none!important}
+@media(min-width:620px){
+  .schedule{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:34px}
+  .day{padding:12px 4px}
+}
+@media(max-width:380px){
+  body{padding-left:9px;padding-right:9px}
+  .hero h1{font-size:26px}
+  .btn{padding:10px 11px}
+  .days{gap:3px}
+  .day{font-size:10px}
+  .lesson{grid-template-columns:52px minmax(0,1fr) 29px;gap:7px}
+}
 </style>
 </head>
+
 <body>
 <div class="app">
-<header class="hero"><div class="topline"><div><div class="eyebrow">✿ góc học tập nhỏ xinh</div><h1 id="heroTitle">Thời khóa biểu<br>của tui 🌷</h1></div><div class="profile-mini"><img id="miniAvatar" class="avatar hidden" alt="Ảnh đại diện"><div id="miniAvatarFallback" class="avatar avatar-fallback">🌷</div></div></div><p id="greeting">Lịch học gọn gàng, dễ thương — lưu ngay trên thiết bị này.</p><div class="datepill" id="todayLabel">☁️ Đang tải ngày…</div></header>
-<main>
-<section id="scheduleView">
-<div class="toolbar"><button class="btn primary" id="addBtn">＋ Thêm môn học</button><button class="btn soft" id="exportBtn">↗ Sao lưu</button><button class="btn" id="importBtn">↙ Khôi phục</button><input type="file" id="importFile" accept="application/json,.json" class="hidden"></div>
-<div class="weeknav"><button class="arrow" id="prevWeek" aria-label="Tuần trước">‹</button><h2 id="weekLabel">Thời khóa biểu tuần này</h2><button class="arrow" id="nextWeek" aria-label="Tuần sau">›</button></div><div class="days" id="days"></div><div class="summary"><div class="stat"><b id="lessonCount">0</b><span>tiết trong ngày 🌼</span></div><div class="stat"><b id="subjectCount">0</b><span>môn khác nhau 📚</span></div></div><div class="schedule" id="schedule"></div><footer>♡ Dữ liệu được lưu trên thiết bị này · Nhớ sao lưu định kỳ nhé ♡</footer>
-</section>
-<section id="notificationsView" class="hidden"><h2 class="view-title">Nhắc lịch học 🔔</h2><p class="subtext">Chọn khoảng thời gian muốn được nhắc trước giờ học.</p>
-<div class="panel"><div class="panel-head"><div class="panel-icon">⏰</div><div><h3>Thời gian nhắc</h3><p>Cài đặt áp dụng cho các tiết có giờ bắt đầu.</p></div></div><label class="rowfield"><div><p>Bật nhắc lịch</p><small>Bật quyền thông báo trên thiết bị nếu được hỗ trợ.</small></div><label class="switch"><input id="reminderEnabled" type="checkbox"><span class="slider"></span></label></label><div style="height:14px"></div><div class="choicegrid"><label class="choice"><input type="radio" name="reminderPreset" value="30">30 phút</label><label class="choice"><input type="radio" name="reminderPreset" value="15" checked>15 phút</label><label class="choice"><input type="radio" name="reminderPreset" value="10">10 phút</label></div><div style="height:10px"></div><label class="choice" style="display:block;text-align:left"><input type="radio" name="reminderPreset" value="custom">Tự đặt số phút</label><div class="custom-minutes"><input id="customMinutes" type="number" min="1" max="1440" value="20" inputmode="numeric"><span class="smallnote">phút trước giờ học</span></div><div style="height:14px"></div><button class="btn primary" id="saveReminderBtn">Lưu cài đặt nhắc</button><button class="btn" id="testNoticeBtn">Gửi thông báo thử</button><p class="status" id="notificationStatus">Chưa bật thông báo.</p></div>
-<div class="notice">Lưu ý: bản này lưu tùy chọn và có thể gửi thông báo thử khi trình duyệt hỗ trợ. Để nhắc tự động đúng giờ khi bạn đã đóng app, cần kết nối Web Push với máy chủ gửi thông báo; chỉ cài số phút ở đây chưa đủ.</div>
-</section>
-<section id="settingsView" class="hidden"><h2 class="view-title">Cài đặt của tui ⚙️</h2><p class="subtext">Một góc nhỏ theo phong cách của riêng bạn.</p>
-<div class="panel"><div class="panel-head"><div class="panel-icon">🌷</div><div><h3>Hồ sơ của bạn</h3><p>Tùy chỉnh tên và ảnh đại diện.</p></div></div><div class="avatar-row"><img id="profileAvatar" class="avatar-large hidden" alt="Ảnh đại diện của bạn"><div id="profileAvatarFallback" class="avatar-large avatar-fallback">🌷</div><div><label class="filelabel">↑ Tải ảnh đại diện<input id="avatarFile" type="file" accept="image/*"></label><p class="smallnote">Ảnh được lưu trên thiết bị này.</p></div></div><div style="height:16px"></div><label class="field"><span>Tên người dùng</span><input id="username" maxlength="40" placeholder="Ví dụ: Vũ"></label><button class="btn primary" id="saveProfileBtn">Lưu hồ sơ</button></div>
-<div class="panel"><div class="panel-head"><div class="panel-icon">🎨</div><div><h3>Giao diện</h3><p>Chọn màu sắc và chế độ hiển thị.</p></div></div><label class="field"><span>Màu chủ đạo</span><div class="colors"><label class="colorchoice"><input type="radio" name="themeColor" value="pink" checked><span style="background:#f3c5d9"></span></label><label class="colorchoice"><input type="radio" name="themeColor" value="lavender"><span style="background:#d8c9fa"></span></label><label class="colorchoice"><input type="radio" name="themeColor" value="mint"><span style="background:#bce8d3"></span></label></div></label><label class="field"><span>Chế độ hiển thị</span><select id="displayMode"><option value="light">Sáng ☀️</option><option value="dark">Tối 🌙</option></select></label><button class="btn primary" id="saveThemeBtn">Áp dụng giao diện</button></div>
-<div class="panel"><div class="panel-head"><div class="panel-icon">💾</div><div><h3>Dữ liệu</h3><p>Lịch học vẫn được lưu cục bộ trên thiết bị này.</p></div></div><button class="btn" id="settingsExportBtn">↗ Sao lưu thời khóa biểu</button><button class="btn" id="settingsImportBtn">↙ Khôi phục bản sao lưu</button><p class="smallnote">Đổi trình duyệt hoặc thiết bị có thể không mang theo dữ liệu và hồ sơ. Hãy xuất bản sao lưu trước khi đổi máy.</p></div>
-</section>
-</main></div>
-<nav class="bottomnav" aria-label="Điều hướng chính"><div class="navinner"><button class="navbtn active" data-view="schedule"><span>🗓️</span>Lịch học</button><button class="navbtn" data-view="notifications"><span>🔔</span>Thông báo</button><button class="navbtn" data-view="settings"><span>⚙️</span>Cài đặt</button></div></nav>
-<dialog id="lessonDialog"><div class="modalhead"><h2 id="dialogTitle">Thêm môn học ✨</h2></div><form id="lessonForm" class="modalbody"><input type="hidden" id="lessonId"><label class="field"><span>Tên môn học *</span><input id="subject" maxlength="70" placeholder="Ví dụ: Toán, Tiếng Anh…" required></label><div class="twocol"><label class="field"><span>Thứ *</span><select id="weekday" required><option value="1">Thứ Hai</option><option value="2">Thứ Ba</option><option value="3">Thứ Tư</option><option value="4">Thứ Năm</option><option value="5">Thứ Sáu</option><option value="6">Thứ Bảy</option><option value="0">Chủ nhật</option></select></label><label class="field"><span>Tiết *</span><select id="periodSelect" required></select></label></div><div class="twocol"><label class="field"><span>Giờ bắt đầu</span><input id="startTime" type="time"></label><label class="field"><span>Giờ kết thúc</span><input id="endTime" type="time"></label></div><label class="field"><span>Phòng học / giáo viên</span><input id="room" maxlength="80" placeholder="Ví dụ: Phòng A2 · Cô Lan"></label><label class="field"><span>Màu thẻ</span><div class="colors"><label class="colorchoice"><input type="radio" name="color" value="#f9dce8" checked><span style="background:#f9dce8"></span></label><label class="colorchoice"><input type="radio" name="color" value="#e8defd"><span style="background:#e8defd"></span></label><label class="colorchoice"><input type="radio" name="color" value="#d9f3e7"><span style="background:#d9f3e7"></span></label><label class="colorchoice"><input type="radio" name="color" value="#fff0c4"><span style="background:#fff0c4"></span></label><label class="colorchoice"><input type="radio" name="color" value="#dceeff"><span style="background:#dceeff"></span></label></div></label><div class="modalactions"><button type="button" class="btn" id="cancelBtn">Hủy</button><button type="submit" class="btn primary">Lưu môn học</button></div><p class="smallnote">Nếu hai môn trùng tiết, ứng dụng vẫn lưu và hiển thị cả hai.</p></form></dialog>
+
+  <header class="hero">
+    <div class="eyebrow">✿ góc học tập nhỏ xinh</div>
+    <h1>Thời khóa biểu<br>của tui 🌷</h1>
+    <p>Lịch học gọn gàng, dễ thương — lưu ngay trên thiết bị này.</p>
+    <div class="datepill" id="todayLabel">☁️ Đang tải ngày…</div>
+  </header>
+
+  <div class="toolbar">
+    <button class="btn primary" id="addBtn">＋ Thêm môn học</button>
+    <button class="btn soft" id="exportBtn">↗ Sao lưu</button>
+    <button class="btn" id="importBtn">↙ Khôi phục</button>
+    <input type="file" id="importFile" accept="application/json,.json" class="hidden">
+  </div>
+
+  <section class="reminderbar" aria-label="Cài đặt nhắc giờ học">
+    <div class="reminder-title">🔔 Nhắc giờ học</div>
+    <div class="reminder-row">
+      <label for="reminderMinutes" class="smallnote">Nhắc trước:</label>
+      <select id="reminderMinutes">
+        <option value="5">5 phút</option>
+        <option value="10">10 phút</option>
+        <option value="15" selected>15 phút</option>
+        <option value="30">30 phút</option>
+      </select>
+      <button class="btn primary" id="enableNoticeBtn">Bật thông báo</button>
+      <button class="btn" id="testNoticeBtn">Thử thông báo</button>
+    </div>
+    <div class="status">
+      <span id="noticeDot" class="status-dot"></span>
+      <p class="smallnote" id="notificationStatus" aria-live="polite">
+        Chưa bật thông báo. Bấm “Bật thông báo” để cấp quyền.
+      </p>
+    </div>
+    <p class="smallnote">
+      Mẹo: thêm giờ bắt đầu cho môn học. Bản này kiểm tra nhắc giờ khi trang
+      đang hoạt động; không bảo đảm thông báo khi đóng hẳn ứng dụng.
+    </p>
+  </section>
+
+  <div class="weeknav">
+    <button class="arrow" id="prevWeek" aria-label="Tuần trước">‹</button>
+    <h2 id="weekLabel">Thời khóa biểu tuần này</h2>
+    <button class="arrow" id="nextWeek" aria-label="Tuần sau">›</button>
+  </div>
+
+  <div class="days" id="days"></div>
+
+  <div class="summary">
+    <div class="stat"><b id="lessonCount">0</b><span>tiết trong ngày 🌼</span></div>
+    <div class="stat"><b id="subjectCount">0</b><span>môn khác nhau 📚</span></div>
+  </div>
+
+  <div class="schedule" id="schedule"></div>
+
+  <footer>
+    ♡ Dữ liệu lưu trên thiết bị này · Nhớ xuất bản sao lưu định kỳ nhé ♡
+  </footer>
+</div>
+
+<dialog id="lessonDialog">
+  <div class="modalhead">
+    <h2 id="dialogTitle">Thêm môn học ✨</h2>
+  </div>
+
+  <form id="lessonForm" class="modalbody">
+    <input type="hidden" id="lessonId">
+
+    <label class="field">
+      <span>Tên môn học *</span>
+      <input id="subject" maxlength="70" placeholder="Ví dụ: Toán, Tiếng Anh…" required>
+    </label>
+
+    <div class="twocol">
+      <label class="field">
+        <span>Thứ *</span>
+        <select id="weekday" required>
+          <option value="1">Thứ Hai</option>
+          <option value="2">Thứ Ba</option>
+          <option value="3">Thứ Tư</option>
+          <option value="4">Thứ Năm</option>
+          <option value="5">Thứ Sáu</option>
+          <option value="6">Thứ Bảy</option>
+          <option value="0">Chủ nhật</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Tiết *</span>
+        <select id="periodSelect" required></select>
+      </label>
+    </div>
+
+    <div class="twocol">
+      <label class="field">
+        <span>Giờ bắt đầu</span>
+        <input id="startTime" type="time">
+      </label>
+      <label class="field">
+        <span>Giờ kết thúc</span>
+        <input id="endTime" type="time">
+      </label>
+    </div>
+
+    <label class="field">
+      <span>Phòng học / giáo viên</span>
+      <input id="room" maxlength="80" placeholder="Ví dụ: Phòng A2 · Cô Lan">
+    </label>
+
+    <div class="field">
+      <span>Màu thẻ</span>
+      <div class="colors">
+        <label class="colorchoice">
+          <input type="radio" name="color" value="#f9dce8" checked>
+          <span style="background:#f9dce8"></span>
+        </label>
+        <label class="colorchoice">
+          <input type="radio" name="color" value="#e8defd">
+          <span style="background:#e8defd"></span>
+        </label>
+        <label class="colorchoice">
+          <input type="radio" name="color" value="#d9f3e7">
+          <span style="background:#d9f3e7"></span>
+        </label>
+        <label class="colorchoice">
+          <input type="radio" name="color" value="#fff0c4">
+          <span style="background:#fff0c4"></span>
+        </label>
+        <label class="colorchoice">
+          <input type="radio" name="color" value="#dceeff">
+          <span style="background:#dceeff"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="modalactions">
+      <button type="button" class="btn" id="cancelBtn">Hủy</button>
+      <button type="submit" class="btn primary">Lưu môn học</button>
+    </div>
+
+    <p class="smallnote">
+      Nếu hai môn trùng tiết, ứng dụng vẫn lưu và hiển thị cả hai để bạn tự kiểm tra.
+    </p>
+  </form>
+</dialog>
+
 <script>
-(function(){
-const $=id=>document.getElementById(id);const DAYS=[{v:1,s:'T2'},{v:2,s:'T3'},{v:3,s:'T4'},{v:4,s:'T5'},{v:5,s:'T6'},{v:6,s:'T7'},{v:0,s:'CN'}];const KEY='cute_timetable_v1',SETKEY='cute_timetable_settings_v1';let lessons=[],selectedDay=(new Date()).getDay(),weekOffset=0;const today=new Date();let settings={username:'',avatar:'',theme:'pink',mode:'light',reminderEnabled:false,reminderPreset:'15',customMinutes:20};
-function load(){try{const x=localStorage.getItem(KEY);lessons=x?JSON.parse(x):[];if(!Array.isArray(lessons))lessons=[]}catch(e){lessons=[]}try{settings={...settings,...JSON.parse(localStorage.getItem(SETKEY)||'{}')}}catch(e){}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(lessons));return true}catch(e){alert('Không lưu được dữ liệu. Hãy xuất bản sao lưu.');return false}}function saveSettings(){try{localStorage.setItem(SETKEY,JSON.stringify(settings));return true}catch(e){alert('Không lưu được cài đặt. Ảnh có thể quá lớn, hãy chọn ảnh nhỏ hơn.');return false}}function uid(){return 'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}function mondayOf(d){let x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}function fmt(d){return d.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'})}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderDays(){const base=mondayOf(today);base.setDate(base.getDate()+weekOffset*7);$('weekLabel').textContent=(weekOffset===0?'Tuần này':('Tuần '+(weekOffset>0?'sau':'trước')))+' · '+fmt(base)+' – '+fmt(new Date(base.getTime()+6*86400000));$('days').innerHTML=DAYS.map(d=>{const dt=new Date(base);dt.setDate(base.getDate()+((d.v+6)%7));const isToday=weekOffset===0&&d.v===today.getDay();return `<button class="day ${selectedDay===d.v?'active':''} ${isToday?'today':''}" data-day="${d.v}">${d.s}<strong>${dt.getDate()}</strong></button>`}).join('');$('days').querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{selectedDay=Number(b.dataset.day);render()}))}
-function render(){renderDays();const arr=lessons.filter(x=>Number(x.day)===selectedDay).sort((a,b)=>Number(a.period)-Number(b.period)||a.subject.localeCompare(b.subject,'vi'));$('lessonCount').textContent=arr.length;$('subjectCount').textContent=new Set(arr.map(x=>x.subject.trim().toLocaleLowerCase('vi'))).size;$('todayLabel').textContent='☁️ '+today.toLocaleDateString('vi-VN',{weekday:'long',day:'numeric',month:'long'});if(!arr.length){$('schedule').innerHTML=`<div class="empty"><div class="emoji">🧸🌷</div><h3>Ngày này chưa có tiết học</h3><p>Thêm môn học đầu tiên để lấp đầy lịch nha!</p><button class="btn primary" id="emptyAdd">＋ Thêm môn học</button></div>`;$('emptyAdd').onclick=()=>openForm();return}$('schedule').innerHTML=arr.map(x=>`<article class="lesson" style="--tint:${esc(x.color||'#f4eaff')}"><div class="period"><b>Tiết ${esc(x.period)}</b><span>${x.start&&x.end?esc(x.start)+'–'+esc(x.end):x.start?esc(x.start):'Học tập'}</span></div><div><h3>${esc(x.subject)}</h3><div class="details">${x.room?'📍 '+esc(x.room):'✿ Chúc bạn học tốt!'}</div></div><div class="lesson-actions"><button class="iconbtn" data-edit="${esc(x.id)}" aria-label="Sửa">✎</button><button class="iconbtn" data-delete="${esc(x.id)}" aria-label="Xóa">×</button></div></article>`).join('');$('schedule').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openForm(b.dataset.edit));$('schedule').querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteLesson(b.dataset.delete))}
-function openForm(id){$('lessonForm').reset();$('lessonId').value='';$('dialogTitle').textContent='Thêm môn học ✨';$('weekday').value=String(selectedDay);$('periodSelect').value='1';if(id){const x=lessons.find(y=>y.id===id);if(!x)return;$('lessonId').value=x.id;$('dialogTitle').textContent='Sửa môn học ✏️';$('subject').value=x.subject;$('weekday').value=String(x.day);$('periodSelect').value=String(x.period);$('startTime').value=x.start||'';$('endTime').value=x.end||'';$('room').value=x.room||'';const r=document.querySelector(`input[name="color"][value="${x.color}"]`);if(r)r.checked=true}$('lessonDialog').showModal()}
-function deleteLesson(id){const x=lessons.find(y=>y.id===id);if(x&&confirm('Xóa môn “'+x.subject+'” khỏi thời khóa biểu nha?')){lessons=lessons.filter(y=>y.id!==id);save();render()}}
-function exportData(){const blob=new Blob([JSON.stringify({app:'Thời khóa biểu của tui',version:1,exportedAt:new Date().toISOString(),lessons},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sao-luu-thoi-khoa-bieu.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}function importData(){ $('importFile').click() }
-function applyProfile(){const name=settings.username.trim();$('greeting').textContent=name?`Chào ${name} nha! Hôm nay mình học thật tốt nhé 🌷`:'Lịch học gọn gàng, dễ thương — lưu ngay trên thiết bị này.';for(const [imgId,fallId] of [['miniAvatar','miniAvatarFallback'],['profileAvatar','profileAvatarFallback']]){if(settings.avatar){$(imgId).src=settings.avatar;$(imgId).classList.remove('hidden');$(fallId).classList.add('hidden')}else{$(imgId).classList.add('hidden');$(fallId).classList.remove('hidden')}}$('username').value=settings.username||''}
-function applyTheme(){document.documentElement.dataset.theme=settings.theme==='pink'?'pink':settings.theme;document.documentElement.dataset.mode=settings.mode||'light';document.querySelectorAll('input[name="themeColor"]').forEach(x=>x.checked=x.value===settings.theme);$('displayMode').value=settings.mode||'light';document.querySelector('meta[name="theme-color"]').content=settings.mode==='dark'?'#1f1b26':settings.theme==='lavender'?'#f1ecff':settings.theme==='mint'?'#effbf5':'#fff2f7'}
-function applyReminderUI(){ $('reminderEnabled').checked=!!settings.reminderEnabled;document.querySelectorAll('input[name="reminderPreset"]').forEach(x=>x.checked=x.value===settings.reminderPreset);$('customMinutes').value=settings.customMinutes||20;updateNoticeStatus() }
-function reminderMinutes(){return settings.reminderPreset==='custom'?Math.max(1,Math.min(1440,Number(settings.customMinutes)||20)):Number(settings.reminderPreset||15)}function updateNoticeStatus(){const supported='Notification'in window;$('notificationStatus').textContent=!supported?'Trình duyệt này chưa hỗ trợ Web Notifications.':!settings.reminderEnabled?'Nhắc lịch đang tắt. Bật lên rồi lưu cài đặt để tiếp tục.':Notification.permission==='granted'?`Đã cấp quyền thông báo. Mức nhắc đang chọn: ${reminderMinutes()} phút trước giờ học. Thông báo tự động khi app đóng cần thiết lập Web Push.`:Notification.permission==='denied'?'Thông báo đang bị chặn trong cài đặt trình duyệt/iPhone.':'Đã chọn nhắc trước '+reminderMinutes()+' phút. Hãy cấp quyền thông báo trên thiết bị.'}
-function showView(view){for(const name of ['schedule','notifications','settings'])$(name+'View').classList.toggle('hidden',name!==view);document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.view===view));window.scrollTo({top:0,behavior:'smooth'})}
-for(let i=1;i<=15;i++)$('periodSelect').add(new Option('Tiết '+i,String(i)));$('addBtn').onclick=()=>openForm();$('cancelBtn').onclick=()=>$('lessonDialog').close();$('lessonForm').onsubmit=e=>{e.preventDefault();const id=$('lessonId').value,old=lessons.find(x=>x.id===id),item={id:id||uid(),subject:$('subject').value.trim(),day:Number($('weekday').value),period:Number($('periodSelect').value),start:$('startTime').value,end:$('endTime').value,room:$('room').value.trim(),color:document.querySelector('input[name="color"]:checked').value};if(!item.subject)return alert('Bạn nhập tên môn học trước nha!');if(item.start&&item.end&&item.end<item.start)return alert('Giờ kết thúc nên sau giờ bắt đầu nha.');if(old)lessons=lessons.map(x=>x.id===id?item:x);else lessons.push(item);save();selectedDay=item.day;$('lessonDialog').close();render()};$('prevWeek').onclick=()=>{weekOffset--;renderDays()};$('nextWeek').onclick=()=>{weekOffset++;renderDays()};$('exportBtn').onclick=exportData;$('settingsExportBtn').onclick=exportData;$('importBtn').onclick=importData;$('settingsImportBtn').onclick=importData;$('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text()),arr=Array.isArray(obj)?obj:obj.lessons;if(!Array.isArray(arr)||!arr.every(x=>x&&typeof x.subject==='string'&&Number.isFinite(Number(x.day))&&Number.isFinite(Number(x.period))))throw new Error('format');if(confirm('Khôi phục sẽ thay thế lịch hiện tại bằng '+arr.length+' tiết từ bản sao lưu. Tiếp tục?')){lessons=arr.map(x=>({...x,id:x.id||uid(),day:Number(x.day),period:Number(x.period)}));save();render();alert('Đã khôi phục thời khóa biểu!')}}catch(err){alert('Tệp sao lưu không hợp lệ. Hãy chọn tệp JSON đã xuất từ ứng dụng.')}e.target.value=''};
-document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showView(b.dataset.view));$('saveProfileBtn').onclick=()=>{settings.username=$('username').value.trim();saveSettings();applyProfile();alert('Đã lưu hồ sơ 🌷')};$('avatarFile').onchange=e=>{const file=e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){alert('Bạn chọn tệp ảnh nha.');return}if(file.size>2*1024*1024){alert('Ảnh hơi lớn rồi. Hãy chọn ảnh dưới 2 MB nha.');e.target.value='';return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas'),max=300,scale=Math.min(1,max/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);settings.avatar=canvas.toDataURL('image/jpeg',.78);if(saveSettings()){applyProfile();alert('Đã cập nhật ảnh đại diện!')}};img.onerror=()=>alert('Không đọc được ảnh này.');img.src=reader.result};reader.readAsDataURL(file);e.target.value=''};$('saveThemeBtn').onclick=()=>{settings.theme=document.querySelector('input[name="themeColor"]:checked').value;settings.mode=$('displayMode').value;saveSettings();applyTheme();alert('Đã áp dụng giao diện ✨')};$('saveReminderBtn').onclick=async()=>{settings.reminderEnabled=$('reminderEnabled').checked;settings.reminderPreset=document.querySelector('input[name="reminderPreset"]:checked')?.value||'15';settings.customMinutes=Math.max(1,Math.min(1440,Number($('customMinutes').value)||20));if(settings.reminderEnabled&&'Notification'in window&&Notification.permission==='default'){try{await Notification.requestPermission()}catch(e){}}saveSettings();applyReminderUI();alert('Đã lưu cài đặt nhắc. Lưu ý: tự động nhắc khi app đóng cần Web Push trên máy chủ.')};$('reminderEnabled').onchange=()=>{settings.reminderEnabled=$('reminderEnabled').checked;updateNoticeStatus()};document.querySelectorAll('input[name="reminderPreset"]').forEach(x=>x.onchange=updateNoticeStatus);$('customMinutes').oninput=()=>{if(document.querySelector('input[name="reminderPreset"]:checked')?.value==='custom')updateNoticeStatus()};$('testNoticeBtn').onclick=async()=>{if(!('Notification'in window)){alert('Trình duyệt này chưa hỗ trợ thông báo.');return}let permission=Notification.permission;if(permission==='default')permission=await Notification.requestPermission();if(permission!=='granted'){alert('Chưa có quyền thông báo. Hãy kiểm tra cài đặt thông báo của iPhone.');updateNoticeStatus();return}try{new Notification('📚 Sắp đến giờ học!',{body:'Đây là thông báo thử từ Thời khóa biểu của tui 🌷',icon:'./icon.svg'});alert('Đã gửi thông báo thử. Nếu không thấy, hãy kiểm tra quyền thông báo của web app trên iPhone.')}catch(e){alert('Không gửi được thông báo thử trong ngữ cảnh này. Hãy thử mở app từ biểu tượng màn hình chính trên iPhone.')}updateNoticeStatus()};
-load();applyProfile();applyTheme();applyReminderUI();render();
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const DAYS = [
+    {v:1,s:'T2',n:'Thứ Hai'},
+    {v:2,s:'T3',n:'Thứ Ba'},
+    {v:3,s:'T4',n:'Thứ Tư'},
+    {v:4,s:'T5',n:'Thứ Năm'},
+    {v:5,s:'T6',n:'Thứ Sáu'},
+    {v:6,s:'T7',n:'Thứ Bảy'},
+    {v:0,s:'CN',n:'Chủ nhật'}
+  ];
+
+  // Giữ nguyên khóa dữ liệu cũ để không làm mất lịch đã lưu.
+  const LESSONS_KEY = 'cute_timetable_v1';
+  const ENABLED_KEY = 'tkb_notifications_enabled';
+  const MINUTES_KEY = 'tkb_reminder_minutes';
+  const SENT_KEY = 'tkb_notifications_sent';
+
+  let lessons = [];
+  let selectedDay = new Date().getDay();
+  let weekOffset = 0;
+
+  const COLORS = ['#f9dce8','#e8defd','#d9f3e7','#fff0c4','#dceeff'];
+
+  function esc(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    })[char]);
+  }
+
+  function uid() {
+    return 'l' + Date.now().toString(36) +
+      Math.random().toString(36).slice(2,7);
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(LESSONS_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      lessons = Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error('Không đọc được thời khóa biểu:', error);
+      lessons = [];
+    }
+  }
+
+  function save() {
+    try {
+      localStorage.setItem(LESSONS_KEY, JSON.stringify(lessons));
+      return true;
+    } catch (error) {
+      alert('Không lưu được dữ liệu. Hãy xuất bản sao lưu và kiểm tra dung lượng.');
+      return false;
+    }
+  }
+
+  function mondayOf(date) {
+    const result = new Date(date);
+    result.setHours(0,0,0,0);
+    result.setDate(result.getDate() - ((result.getDay() + 6) % 7));
+    return result;
+  }
+
+  function fmt(date) {
+    return date.toLocaleDateString('vi-VN', {
+      day:'2-digit',
+      month:'2-digit'
+    });
+  }
+
+  function renderDays() {
+    const base = mondayOf(new Date());
+    base.setDate(base.getDate() + weekOffset * 7);
+
+    const end = new Date(base);
+    end.setDate(end.getDate() + 6);
+
+    $('weekLabel').textContent =
+      (weekOffset === 0 ? 'Tuần này' : weekOffset > 0 ? 'Tuần sau' : 'Tuần trước')
+      + ' · ' + fmt(base) + ' – ' + fmt(end);
+
+    $('days').innerHTML = DAYS.map(day => {
+      const date = new Date(base);
+      date.setDate(base.getDate() + ((day.v + 6) % 7));
+
+      const isToday =
+        weekOffset === 0 && day.v === new Date().getDay();
+
+      return `
+        <button type="button"
+          class="day ${selectedDay === day.v ? 'active' : ''} ${isToday ? 'today' : ''}"
+          data-day="${day.v}">
+          ${day.s}
+          <strong>${date.getDate()}</strong>
+        </button>
+      `;
+    }).join('');
+
+    $('days').querySelectorAll('[data-day]').forEach(button => {
+      button.addEventListener('click', () => {
+        selectedDay = Number(button.dataset.day);
+        render();
+      });
+    });
+  }
+
+  function render() {
+    renderDays();
+
+    const today = new Date();
+
+    $('todayLabel').textContent = '☁️ ' +
+      today.toLocaleDateString('vi-VN', {
+        weekday:'long',
+        day:'numeric',
+        month:'long',
+        year:'numeric'
+      });
+
+    const dailyLessons = lessons
+      .filter(item => Number(item.day) === selectedDay)
+      .sort((a,b) =>
+        Number(a.period) - Number(b.period) ||
+        String(a.subject).localeCompare(String(b.subject),'vi')
+      );
+
+    $('lessonCount').textContent = dailyLessons.length;
+    $('subjectCount').textContent =
+      new Set(dailyLessons.map(item =>
+        String(item.subject).trim().toLocaleLowerCase('vi')
+      )).size;
+
+    if (!dailyLessons.length) {
+      $('schedule').innerHTML = `
+        <div class="empty">
+          <div class="emoji">🧸🌷</div>
+          <h3>Ngày này chưa có tiết học</h3>
+          <p>Thêm môn học đầu tiên để lấp đầy lịch nha!</p>
+          <button type="button" class="btn primary" id="emptyAdd">
+            ＋ Thêm môn học
+          </button>
+        </div>
+      `;
+      $('emptyAdd').addEventListener('click', () => openForm());
+      return;
+    }
+
+    $('schedule').innerHTML = dailyLessons.map(item => {
+      const time = item.start && item.end
+        ? esc(item.start) + '–' + esc(item.end)
+        : item.start
+          ? 'Bắt đầu ' + esc(item.start)
+          : 'Học tập';
+
+      return `
+        <article class="lesson" style="--tint:${esc(item.color || '#f4eaff')}">
+          <div class="period">
+            <b>Tiết ${esc(item.period)}</b>
+            <span>${time}</span>
+          </div>
+          <div>
+            <h3>${esc(item.subject)}</h3>
+            <div class="details">
+              ${item.room ? '📍 ' + esc(item.room) : '✿ Chúc bạn học tốt!'}
+            </div>
+          </div>
+          <div class="lesson-actions">
+            <button type="button" class="iconbtn"
+              data-edit="${esc(item.id)}" aria-label="Sửa môn học">✎</button>
+            <button type="button" class="iconbtn"
+              data-delete="${esc(item.id)}" aria-label="Xóa môn học">×</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    $('schedule').querySelectorAll('[data-edit]').forEach(button => {
+      button.addEventListener('click', () => openForm(button.dataset.edit));
+    });
+
+    $('schedule').querySelectorAll('[data-delete]').forEach(button => {
+      button.addEventListener('click', () => deleteLesson(button.dataset.delete));
+    });
+  }
+
+  function openForm(id) {
+    $('lessonForm').reset();
+    $('lessonId').value = '';
+    $('dialogTitle').textContent = 'Thêm môn học ✨';
+    $('weekday').value = String(selectedDay);
+    $('periodSelect').value = '1';
+
+    if (id) {
+      const item = lessons.find(lesson => lesson.id === id);
+      if (!item) return;
+
+      $('lessonId').value = item.id;
+      $('dialogTitle').textContent = 'Sửa môn học ✏️';
+      $('subject').value = item.subject || '';
+      $('weekday').value = String(item.day);
+      $('periodSelect').value = String(item.period);
+      $('startTime').value = item.start || '';
+      $('endTime').value = item.end || '';
+      $('room').value = item.room || '';
+
+      const colorRadio = document.querySelector(
+        'input[name="color"][value="' + (item.color || COLORS[0]) + '"]'
+      );
+
+      document.querySelectorAll('input[name="color"]').forEach(radio => {
+        radio.checked = false;
+      });
+
+      if (colorRadio) colorRadio.checked = true;
+      else document.querySelector('input[name="color"]').checked = true;
+    }
+
+    $('lessonDialog').showModal();
+  }
+
+  function deleteLesson(id) {
+    const item = lessons.find(lesson => lesson.id === id);
+    if (!item) return;
+
+    if (confirm('Xóa môn “' + item.subject + '” khỏi thời khóa biểu nha?')) {
+      const previous = lessons;
+      lessons = lessons.filter(lesson => lesson.id !== id);
+
+      if (save()) render();
+      else lessons = previous;
+    }
+  }
+
+  for (let i = 1; i <= 15; i++) {
+    $('periodSelect').add(new Option('Tiết ' + i, String(i)));
+  }
+
+  $('addBtn').addEventListener('click', () => openForm());
+  $('cancelBtn').addEventListener('click', () => $('lessonDialog').close());
+
+  $('lessonForm').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const id = $('lessonId').value;
+    const old = lessons.find(item => item.id === id);
+
+    const selectedColor = document.querySelector(
+      'input[name="color"]:checked'
+    );
+
+    const item = {
+      id: id || uid(),
+      subject: $('subject').value.trim(),
+      day: Number($('weekday').value),
+      period: Number($('periodSelect').value),
+      start: $('startTime').value,
+      end: $('endTime').value,
+      room: $('room').value.trim(),
+      color: selectedColor ? selectedColor.value : COLORS[0]
+    };
+
+    if (!item.subject) {
+      alert('Bạn nhập tên môn học trước nha!');
+      return;
+    }
+
+    if (item.start && item.end && item.end < item.start) {
+      alert('Giờ kết thúc nên sau giờ bắt đầu nha.');
+      return;
+    }
+
+    const previous = lessons;
+
+    if (old) {
+      lessons = lessons.map(lesson => lesson.id === id ? item : lesson);
+    } else {
+      lessons = [...lessons, item];
+    }
+
+    if (!save()) {
+      lessons = previous;
+      return;
+    }
+
+    selectedDay = item.day;
+    $('lessonDialog').close();
+    render();
+  });
+
+  $('prevWeek').addEventListener('click', () => {
+    weekOffset--;
+    renderDays();
+  });
+
+  $('nextWeek').addEventListener('click', () => {
+    weekOffset++;
+    renderDays();
+  });
+
+  $('exportBtn').addEventListener('click', () => {
+    const backup = {
+      app:'Thời khóa biểu của tui',
+      version:1,
+      exportedAt:new Date().toISOString(),
+      lessons
+    };
+
+    const blob = new Blob(
+      [JSON.stringify(backup, null, 2)],
+      {type:'application/json'}
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'sao-luu-thoi-khoa-bieu.json';
+    link.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  });
+
+  $('importBtn').addEventListener('click', () => $('importFile').click());
+
+  $('importFile').addEventListener('change', async event => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const parsed = JSON.parse(await file.text());
+      const imported = Array.isArray(parsed) ? parsed : parsed.lessons;
+
+      if (!Array.isArray(imported) || !imported.every(item =>
+        item &&
+        typeof item.subject === 'string' &&
+        Number.isFinite(Number(item.day)) &&
+        Number(item.day) >= 0 &&
+        Number(item.day) <= 6 &&
+        Number.isFinite(Number(item.period)) &&
+        Number(item.period) >= 1 &&
+        Number(item.period) <= 15
+      )) {
+        throw new Error('Tệp không đúng định dạng');
+      }
+
+      if (confirm(
+        'Khôi phục sẽ thay thế lịch hiện tại bằng ' +
+        imported.length + ' tiết từ bản sao lưu. Tiếp tục?'
+      )) {
+        const previous = lessons;
+
+        lessons = imported.map(item => ({
+          ...item,
+          id:item.id || uid(),
+          day:Number(item.day),
+          period:Number(item.period),
+          start:item.start || '',
+          end:item.end || '',
+          room:item.room || '',
+          color:item.color || COLORS[0]
+        }));
+
+        if (save()) {
+          render();
+          alert('Đã khôi phục thời khóa biểu!');
+        } else {
+          lessons = previous;
+        }
+      }
+    } catch (error) {
+      alert('Tệp sao lưu không hợp lệ. Hãy chọn tệp JSON đã xuất từ ứng dụng.');
+    }
+
+    event.target.value = '';
+  });
+
+  // ---------------- THÔNG BÁO ----------------
+
+  const status = $('notificationStatus');
+  const dot = $('noticeDot');
+
+  function setNoticeStatus(message, ok = false) {
+    status.textContent = message;
+    dot.classList.toggle('ok', ok);
+  }
+
+  function getReminderMinutes() {
+    return Number(localStorage.getItem(MINUTES_KEY) || '15');
+  }
+
+  $('reminderMinutes').value = String(getReminderMinutes());
+
+  $('reminderMinutes').addEventListener('change', () => {
+    localStorage.setItem(MINUTES_KEY, $('reminderMinutes').value);
+    setNoticeStatus(
+      'Đã đặt nhắc trước ' + $('reminderMinutes').value + ' phút.',
+      true
+    );
+  });
+
+  async function getRegistration() {
+    if (!('serviceWorker' in navigator)) {
+      throw new Error('Thiết bị chưa hỗ trợ Service Worker.');
+    }
+
+    const registration = await navigator.serviceWorker.register('./sw.js');
+    return await navigator.serviceWorker.ready || registration;
+  }
+
+  async function sendNotification(title, body, tag) {
+    if (!('Notification' in window)) {
+      throw new Error('Trình duyệt chưa hỗ trợ thông báo.');
+    }
+
+    if (Notification.permission !== 'granted') {
+      throw new Error('Chưa được cấp quyền thông báo.');
+    }
+
+    const registration = await getRegistration();
+
+    await registration.showNotification(title, {
+      body,
+      icon:'./icon.svg',
+      badge:'./icon.svg',
+      tag,
+      data:{url:'./'}
+    });
+  }
+
+  async function requestNotificationPermission() {
+    if (!window.isSecureContext) {
+      setNoticeStatus('Hãy mở website bằng đường dẫn HTTPS.');
+      return false;
+    }
+
+    if (!('Notification' in window)) {
+      setNoticeStatus(
+        'Thiết bị chưa hỗ trợ thông báo. Hãy dùng trình duyệt tương thích và thử lại.'
+      );
+      return false;
+    }
+
+    let permission = Notification.permission;
+
+    if (permission === 'default') {
+      permission = await Notification.requestPermission();
+    }
+
+    if (permission !== 'granted') {
+      setNoticeStatus(
+        'Chưa cấp quyền thông báo. Hãy kiểm tra Cài đặt thông báo trên iPhone.'
+      );
+      return false;
+    }
+
+    await getRegistration();
+    localStorage.setItem(ENABLED_KEY, 'true');
+
+    setNoticeStatus(
+      'Đã bật quyền thông báo. Hãy giữ trang hoạt động để kiểm tra giờ học.',
+      true
+    );
+
+    return true;
+  }
+
+  $('enableNoticeBtn').addEventListener('click', async () => {
+    try {
+      const enabled = await requestNotificationPermission();
+      if (!enabled) return;
+
+      await sendNotification(
+        '🔔 Đã bật nhắc giờ học!',
+        'Bạn có thể dùng thử thông báo ngay bây giờ 🌷',
+        'tkb-enabled'
+      );
+    } catch (error) {
+      console.error('Lỗi bật thông báo:', error);
+      setNoticeStatus('Chưa bật được thông báo. Hãy thử tải lại trang.');
+    }
+  });
+
+  $('testNoticeBtn').addEventListener('click', async () => {
+    try {
+      const enabled = await requestNotificationPermission();
+      if (!enabled) return;
+
+      await sendNotification(
+        '📚 Thông báo thử!',
+        'Nếu thấy thông báo này thì thông báo thử đã hoạt động 🌷',
+        'tkb-test-' + Date.now()
+      );
+
+      setNoticeStatus(
+        'Đã gửi thông báo thử. Hãy kiểm tra Trung tâm thông báo trên iPhone.',
+        true
+      );
+    } catch (error) {
+      console.error('Lỗi thông báo thử:', error);
+      setNoticeStatus('Gửi thông báo thử thất bại. Hãy kiểm tra quyền thông báo.');
+    }
+  });
+
+  function getSentReminders() {
+    try {
+      return JSON.parse(localStorage.getItem(SENT_KEY) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function checkReminders() {
+    if (localStorage.getItem(ENABLED_KEY) !== 'true') return;
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+
+    const now = new Date();
+    const day = now.getDay();
+    const reminderMinutes = getReminderMinutes();
+    const sent = getSentReminders();
+
+    // Xóa các dấu nhắc cũ để dữ liệu không tăng mãi.
+    for (const key of Object.keys(sent)) {
+      if (!key.startsWith(now.toDateString() + '|')) {
+        delete sent[key];
+      }
+    }
+
+    let changed = false;
+
+    for (const item of lessons) {
+      if (Number(item.day) !== day || !item.start) continue;
+
+      const parts = String(item.start).split(':').map(Number);
+      if (
+        parts.length !== 2 ||
+        !Number.isInteger(parts[0]) ||
+        !Number.isInteger(parts[1]) ||
+        parts[0] < 0 || parts[0] > 23 ||
+        parts[1] < 0 || parts[1] > 59
+      ) continue;
+
+      const start = new Date(now);
+      start.setHours(parts[0], parts[1], 0, 0);
+
+      const remindAt = new Date(
+        start.getTime() - reminderMinutes * 60 * 1000
+      );
+
+      // Không gửi trước thời gian nhắc hoặc sau giờ bắt đầu.
+      if (now < remindAt || now >= start) continue;
+
+      const key = now.toDateString() + '|' +
+        (item.id || item.subject) + '|' + item.start;
+
+      if (sent[key]) continue;
+
+      sent[key] = true;
+      changed = true;
+
+      sendNotification(
+        '🌷 Sắp đến giờ học: ' + item.subject,
+        'Bắt đầu lúc ' + item.start +
+          (item.room ? ' · ' + item.room : '') +
+          '. Còn khoảng ' + reminderMinutes + ' phút nữa nha!',
+        'tkb-lesson-' + key
+      ).catch(error => {
+        console.error('Không gửi được thông báo giờ học:', error);
+      });
+    }
+
+    if (changed || Object.keys(sent).length) {
+      try {
+        localStorage.setItem(SENT_KEY, JSON.stringify(sent));
+      } catch (error) {
+        console.warn('Không lưu được trạng thái nhắc giờ:', error);
+      }
+    }
+  }
+
+  // Bộ hẹn giờ chỉ có thể kiểm tra khi trang đang hoạt động.
+  setInterval(checkReminders, 15000);
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) checkReminders();
+  });
+
+  window.addEventListener('focus', checkReminders);
+
+  if (localStorage.getItem(ENABLED_KEY) === 'true') {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      setNoticeStatus(
+        'Quyền thông báo đã bật. Trang cần hoạt động để kiểm tra lịch học.',
+        true
+      );
+    } else {
+      setNoticeStatus('Hãy bấm “Bật thông báo” để cấp quyền lại.');
+    }
+  }
+
+  // Đăng ký Service Worker cho PWA và thông báo.
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(error => {
+        console.error('Không đăng ký được Service Worker:', error);
+      });
+    });
+  }
+
+  load();
+  render();
 })();
 </script>
-<script>if('serviceWorker'in navigator&&location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}</script>
-</body></html>
+</body>
+</html>
