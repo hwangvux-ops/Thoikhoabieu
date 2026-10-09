@@ -1,18 +1,1 @@
-{
-  "name": "Thời khóa biểu của tui",
-  "short_name": "TKB của tui",
-  "lang": "vi",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#fff8fb",
-  "theme_color": "#fff2f7",
-  "icons": [
-    {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
-}
+
