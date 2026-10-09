@@ -291,17 +291,30 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
   </footer>
 </div>
  <label class="field">
-      <span>Ảnh đại diện</span>
-      <input id="profileImageInput" type="file"
-             accept="image/*">
+
+<dialog id="profileDialog">
+  <div class="modalhead">
+    <h2>Hồ sơ cá nhân 🌷</h2>
+  </div>
+
+  <form id="profileForm" class="modalbody">
+    <label class="field">
+      <span>Tên hiển thị *</span>
+      <input id="profileNameInput" maxlength="40"
+        placeholder="Nhập tên bạn muốn..." required>
     </label>
 
-    <img id="profilePreview" class="profile-avatar"
-         alt="Xem trước ảnh"
-         style="width:100px;height:100px;display:block;margin:10px auto">
+    <label class="field">
+      <span>Ảnh đại diện</span>
+      <input id="profileImageInput" type="file" accept="image/*">
+    </label>
+
+    <div class="profile-preview-wrap">
+      <img id="profilePreview" alt="Xem trước ảnh">
+    </div>
 
     <p class="smallnote">
-      Tên và ảnh được lưu trên trình duyệt của thiết bị này.
+      Tên và ảnh được lưu trên thiết bị này.
     </p>
 
     <div class="modalactions">
