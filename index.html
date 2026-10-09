@@ -213,6 +213,19 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
   font-weight: 700;
   cursor: pointer;
 }
+  .profile-preview-wrap {
+  text-align: center;
+  margin: 12px 0;
+}
+
+#profilePreview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--pink);
+  background: #f4eaff;
+}
 </style>
 </head>
 
@@ -290,8 +303,6 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
     ♡ Dữ liệu lưu trên thiết bị này · Nhớ xuất bản sao lưu định kỳ nhé ♡
   </footer>
 </div>
- <label class="field">
-
 <dialog id="profileDialog">
   <div class="modalhead">
     <h2>Hồ sơ cá nhân 🌷</h2>
