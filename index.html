@@ -171,6 +171,48 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
   .day{font-size:10px}
   .lesson{grid-template-columns:52px minmax(0,1fr) 29px;gap:7px}
 }
+  
+/* Hồ sơ cá nhân */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px;
+  margin: 8px 0 14px;
+  background: rgba(255,255,255,.9);
+  border: 1px solid #f0e5ee;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px #573e5b08;
+}
+.profile-avatar {
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f4eaff;
+  border: 3px solid #f5dce8;
+}
+.profile-info { flex: 1; min-width: 0; }
+.profile-info strong {
+  display: block;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.profile-info small {
+  display: block;
+  color: #897d90;
+  margin-top: 5px;
+}
+.profile-edit {
+  border: 0;
+  border-radius: 12px;
+  background: #f0e8ff;
+  padding: 10px 12px;
+  color: #493e51;
+  font-weight: 700;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -184,7 +226,20 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
     <div class="datepill" id="todayLabel">☁️ Đang tải ngày…</div>
   </header>
 
-  <div class="toolbar">
+<section class="profile-card">
+  <img id="profileAvatar" class="profile-avatar"
+       alt="Ảnh đại diện"
+       src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23f4eaff'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-size='45'%3E🌷%3C/text%3E%3C/svg%3E">
+  <div class="profile-info">
+    <strong id="profileName">Bạn chưa đặt tên</strong>
+    <small>Góc học tập nhỏ của bạn ✨</small>
+  </div>
+  <button class="profile-edit" id="editProfileBtn" type="button">
+    ✎ Hồ sơ
+  </button>
+</section>
+
+<div class="toolbar">
     <button class="btn primary" id="addBtn">＋ Thêm môn học</button>
     <button class="btn soft" id="exportBtn">↗ Sao lưu</button>
     <button class="btn" id="importBtn">↙ Khôi phục</button>
@@ -235,7 +290,26 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
     ♡ Dữ liệu lưu trên thiết bị này · Nhớ xuất bản sao lưu định kỳ nhé ♡
   </footer>
 </div>
+ <label class="field">
+      <span>Ảnh đại diện</span>
+      <input id="profileImageInput" type="file"
+             accept="image/*">
+    </label>
 
+    <img id="profilePreview" class="profile-avatar"
+         alt="Xem trước ảnh"
+         style="width:100px;height:100px;display:block;margin:10px auto">
+
+    <p class="smallnote">
+      Tên và ảnh được lưu trên trình duyệt của thiết bị này.
+    </p>
+
+    <div class="modalactions">
+      <button type="button" class="btn" id="cancelProfileBtn">Hủy</button>
+      <button type="submit" class="btn primary">Lưu hồ sơ</button>
+    </div>
+  </form>
+</dialog>
 <dialog id="lessonDialog">
   <div class="modalhead">
     <h2 id="dialogTitle">Thêm môn học ✨</h2>
@@ -936,7 +1010,100 @@ dialog::backdrop{background:#30233877;backdrop-filter:blur(3px)}
       });
     });
   }
+const PROFILE_KEY = 'mylife_profile_v1';
+let profileImage = '';
 
+function renderProfile() {
+  let profile = {};
+  try {
+    profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+  } catch (e) {}
+
+  $('profileName').textContent = profile.name || 'Bạn chưa đặt tên';
+  if (profile.avatar) {
+    $('profileAvatar').src = profile.avatar;
+  }
+
+  profileImage = profile.avatar || '';
+}
+
+$('editProfileBtn').onclick = () => {
+  let profile = {};
+  try {
+    profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+  } catch (e) {}
+
+  $('profileNameInput').value = profile.name || '';
+  profileImage = profile.avatar || '';
+  $('profilePreview').src = profileImage || $('profileAvatar').src;
+  $('profileImageInput').value = '';
+  $('profileDialog').showModal();
+};
+
+$('cancelProfileBtn').onclick = () => {
+  $('profileDialog').close();
+};
+
+$('profileImageInput').onchange = (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    alert('Bạn hãy chọn một tệp ảnh nha!');
+    e.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const img = new Image();
+
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const size = 300;
+      const scale = Math.min(size / img.width, size / img.height, 1);
+
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      profileImage = canvas.toDataURL('image/jpeg', 0.78);
+      $('profilePreview').src = profileImage;
+    };
+
+    img.onerror = () => alert('Không đọc được ảnh này, bạn thử ảnh khác nha!');
+    img.src = reader.result;
+  };
+
+  reader.readAsDataURL(file);
+};
+
+$('profileForm').onsubmit = (e) => {
+  e.preventDefault();
+
+  const name = $('profileNameInput').value.trim();
+  if (!name) {
+    alert('Bạn nhập tên trước nha!');
+    return;
+  }
+
+  try {
+    localStorage.setItem(PROFILE_KEY, JSON.stringify({
+      name,
+      avatar: profileImage
+    }));
+
+    renderProfile();
+    $('profileDialog').close();
+  } catch (err) {
+    alert('Không lưu được ảnh. Bạn thử chọn ảnh nhỏ hơn nha!');
+  }
+};
+
+renderProfile();
   load();
   render();
 })();
